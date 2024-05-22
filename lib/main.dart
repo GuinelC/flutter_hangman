@@ -65,7 +65,8 @@ class _HangmanGamePageState extends State<HangmanGamePage> {
             newDisplayedWord += letter;
             letterFound = true;
           } else {
-            newDisplayedWord += guessedLetters.contains(currentWord[i]) ? currentWord[i] : '_ ';
+            newDisplayedWord +=
+                guessedLetters.contains(currentWord[i]) ? currentWord[i] : '_ ';
           }
         }
         displayedWord = newDisplayedWord;
@@ -101,7 +102,9 @@ class _HangmanGamePageState extends State<HangmanGamePage> {
       gameHistory.add(
         HangmanGameResult(
           word: currentWord,
-          result: displayedWord == currentWord ? HangmanGameResultType.win : HangmanGameResultType.loss,
+          result: displayedWord == currentWord
+              ? HangmanGameResultType.win
+              : HangmanGameResultType.loss,
         ),
       );
     }
@@ -131,7 +134,10 @@ class _HangmanGamePageState extends State<HangmanGamePage> {
                       children: [
                         Text(
                           'Game History',
-                          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.blue),
+                          style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.blue),
                         ),
                         const SizedBox(height: 10),
                         DataTable(
@@ -145,9 +151,15 @@ class _HangmanGamePageState extends State<HangmanGamePage> {
                                 DataCell(Text(gameResult.word)),
                                 DataCell(
                                   Text(
-                                    gameResult.result == HangmanGameResultType.win ? 'Win' : 'Loss',
+                                    gameResult.result ==
+                                            HangmanGameResultType.win
+                                        ? 'Win'
+                                        : 'Loss',
                                     style: TextStyle(
-                                      color: gameResult.result == HangmanGameResultType.win ? Colors.green : Colors.red,
+                                      color: gameResult.result ==
+                                              HangmanGameResultType.win
+                                          ? Colors.green
+                                          : Colors.red,
                                     ),
                                   ),
                                 ),
@@ -165,10 +177,13 @@ class _HangmanGamePageState extends State<HangmanGamePage> {
                     children: [
                       TextField(
                         controller: wordController,
-                        decoration: const InputDecoration(labelText: 'Enter a word to guess'),
+                        decoration: const InputDecoration(
+                            labelText: 'Enter a word to guess'),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0), // Ajoute une marge verticale de 8.0 pixels autour du bouton
+                        padding: const EdgeInsets.symmetric(
+                            vertical:
+                                8.0), // Ajoute une marge verticale de 8.0 pixels autour du bouton
                         child: ElevatedButton(
                           onPressed: _startGameWithCustomWord,
                           child: const Text('Start Game'),
@@ -187,13 +202,18 @@ class _HangmanGamePageState extends State<HangmanGamePage> {
                     const SizedBox(height: 20),
                     Text(
                       displayedWord,
-                      style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                          fontSize: 40, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 20),
                     if (isGameOver)
                       Text(
                         displayedWord == currentWord ? 'You won!' : 'You lost!',
-                        style: TextStyle(fontSize: 20, color: displayedWord == currentWord ? Colors.green : Colors.red),
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: displayedWord == currentWord
+                                ? Colors.green
+                                : Colors.red),
                       ),
                     if (!isGameOver)
                       Wrap(
@@ -201,7 +221,8 @@ class _HangmanGamePageState extends State<HangmanGamePage> {
                         children: List.generate(
                           26,
                           (index) {
-                            final letter = String.fromCharCode('a'.codeUnitAt(0) + index);
+                            final letter =
+                                String.fromCharCode('a'.codeUnitAt(0) + index);
                             return GestureDetector(
                               onTap: () {
                                 _checkLetter(letter);
@@ -216,7 +237,10 @@ class _HangmanGamePageState extends State<HangmanGamePage> {
                                       height: 40,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(5),
-                                        color: guessedLetters.contains(letter) ? Colors.transparent : const Color.fromARGB(255, 218, 218, 218),
+                                        color: guessedLetters.contains(letter)
+                                            ? Colors.transparent
+                                            : const Color.fromARGB(
+                                                255, 218, 218, 218),
                                       ),
                                       alignment: Alignment.center,
                                       child: Text(
@@ -249,7 +273,8 @@ class _HangmanGamePageState extends State<HangmanGamePage> {
                     // Dessin du pendu
                     CustomPaint(
                       size: const Size(200, 200),
-                      painter: HangmanPainter(incorrectAttempts: incorrectAttempts),
+                      painter:
+                          HangmanPainter(incorrectAttempts: incorrectAttempts),
                     ),
                   ],
                 ),
@@ -284,7 +309,8 @@ class HangmanPainter extends CustomPainter {
     // Ligne verticale
     if (incorrectAttempts > 1) {
       canvas.drawLine(
-        Offset(size.width / 4, size.height / 6), // Début bien à gauche du premier trait
+        Offset(size.width / 4,
+            size.height / 6), // Début bien à gauche du premier trait
         Offset(size.width / 4, 6 * size.height / 6), // Fin à la hauteur totale
         paint,
       );
@@ -293,7 +319,10 @@ class HangmanPainter extends CustomPainter {
     // Petite ligne diagonale
     if (incorrectAttempts > 2) {
       canvas.drawLine(
-        Offset(1.5 * size.width / 4, size.height / 6), // Début légèrement à droite du début de la première ligne horizontale
+        Offset(
+            1.5 * size.width / 4,
+            size.height /
+                6), // Début légèrement à droite du début de la première ligne horizontale
         Offset(size.width / 4, 2 * size.height / 5), // Fin au 3/4 de la hauteur
         paint,
       );
@@ -302,7 +331,10 @@ class HangmanPainter extends CustomPainter {
     // Ligne verticale
     if (incorrectAttempts > 3) {
       canvas.drawLine(
-        Offset(size.width / 2, size.height / 6), // Début au milieu de la première ligne horizontale
+        Offset(
+            size.width / 2,
+            size.height /
+                6), // Début au milieu de la première ligne horizontale
         Offset(size.width / 2, size.height / 3), // Fin à un tiers de la hauteur
         paint,
       );
@@ -310,7 +342,8 @@ class HangmanPainter extends CustomPainter {
 
     // Tête du pendu
     if (incorrectAttempts > 4) {
-      canvas.drawCircle(Offset(size.width / 2, size.height / 5 + 40), 15, paint);
+      canvas.drawCircle(
+          Offset(size.width / 2, size.height / 5 + 40), 15, paint);
     }
 
     // Corps
@@ -334,8 +367,10 @@ class HangmanPainter extends CustomPainter {
     if (incorrectAttempts > 7) {
       // Bras droit
       canvas.drawLine(
-        Offset(size.width / 2, size.height / 3 + 50), // Début au niveau du corps
-        Offset(size.width / 2 + 30, size.height / 3 + 20), // Fin un peu plus bas et vers la droite
+        Offset(
+            size.width / 2, size.height / 3 + 50), // Début au niveau du corps
+        Offset(size.width / 2 + 30,
+            size.height / 3 + 20), // Fin un peu plus bas et vers la droite
         paint,
       );
     }
@@ -343,8 +378,10 @@ class HangmanPainter extends CustomPainter {
     // Jambe gauche
     if (incorrectAttempts > 8) {
       canvas.drawLine(
-        Offset(size.width / 2, size.height / 3 + 80), // Début au niveau du corps
-        Offset(size.width / 2 - 30, size.height * 2 / 2), // Fin un peu plus bas et vers la gauche
+        Offset(
+            size.width / 2, size.height / 3 + 80), // Début au niveau du corps
+        Offset(size.width / 2 - 30,
+            size.height * 2 / 2), // Fin un peu plus bas et vers la gauche
         paint,
       );
     }
@@ -352,8 +389,10 @@ class HangmanPainter extends CustomPainter {
     // Jambe droite
     if (incorrectAttempts > 9) {
       canvas.drawLine(
-        Offset(size.width / 2, size.height / 3 + 80), // Début au niveau du corps
-        Offset(size.width / 2 + 30, size.height * 2 / 2), // Fin un peu plus bas et vers la droite
+        Offset(
+            size.width / 2, size.height / 3 + 80), // Début au niveau du corps
+        Offset(size.width / 2 + 30,
+            size.height * 2 / 2), // Fin un peu plus bas et vers la droite
         paint,
       );
     }
