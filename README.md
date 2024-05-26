@@ -69,9 +69,9 @@ Les contributions sont les bienvenues ! Veuillez forker le dépôt et soumettre 
 ## Licence
 Ce projet est sous licence MIT - voir le fichier LICENSE pour plus de détails.
 
-## Contact
-Si vous avez des questions ou des suggestions, n'hésitez pas à me contacter !
-
+## Fonctionnalités à venir
+- Possibilité de jouer à 2 sur un même écran.
+- Système de sauvegarde pour pouvoir reprendre le cours de sa partie et enregistrer les scores.
 
 
 
